@@ -12,7 +12,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors() // Enable CORS
             .and()
-            .csrf().disable() // Disable CSRF protection for simplicity
+            .csrf().disable() // Disable CSRF protection for simplicity (consider the implications)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/v1/**").permitAll() // Allow access to API endpoints without authentication
                 .anyRequest().authenticated() // All other requests require authentication
