@@ -13,9 +13,10 @@ public class SecurityConfig {
         http.cors() // Enable CORS
             .and()
             .csrf().disable() // Disable CSRF protection for simplicity
-            .authorizeRequests()
-            .antMatchers("/api/v1/**").permitAll() // Allow access to API endpoints without authentication
-            .anyRequest().authenticated(); // All other requests require authentication
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/v1/**").permitAll() // Allow access to API endpoints without authentication
+                .anyRequest().authenticated() // All other requests require authentication
+            );
 
         return http.build();
     }
