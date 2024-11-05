@@ -6,14 +6,15 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class WebConfig {
+public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable() // Disable CSRF protection if not needed
+        http.csrf().disable() // Disable CSRF protection
             .cors().disable() // Disable CORS
-            .authorizeRequests()
-            .anyRequest().permitAll(); // Allow all requests (adjust as necessary)
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().permitAll() // Allow all requests (adjust as necessary)
+            );
         return http.build();
     }
 }
